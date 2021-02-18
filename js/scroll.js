@@ -1,17 +1,15 @@
-const isInViewport = (elem) => {
+const isInVerticalViewport = (elem) => {
     const box = elem.getBoundingClientRect();
     return (
-        box.top >= 100 &&
-        box.left >= 0 &&
-        box.bottom <= (window.innerHeight + 100 || document.documentElement.clientHeight + 100 ) &&
-        box.right <= (window.innerWidth || document.documentElement.clientWidth)
+        box.top >= 35 &&
+        box.bottom <= (window.innerHeight - 35 || document.documentElement.clientHeight)
     );
 };
 
 const toggleFade = (scrollableElems) => {
     for(let i = 0; i < scrollableElems.length; i++) {
         let elem = scrollableElems[i];
-        if(isInViewport(elem)) {
+        if(isInVerticalViewport(elem)) {
             if(!elem.classList.contains("fade-in")) {
                 elem.classList.remove("fade-out");
                 elem.classList.add("fade-in");
@@ -31,8 +29,3 @@ document.addEventListener('scroll', () => {
     let scrollableElems = document.getElementsByClassName("scrollable");
     toggleFade(scrollableElems);
 });
-
-document.addEventListener('scroll', () => {
-    let img = document.getElementById("header-img");
-    console.log(img.getBoundingClientRect());
-})
