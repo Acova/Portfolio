@@ -25,6 +25,7 @@
 html {
     font-family: 'Overpass Mono', monospace;
     font-size: 2vw;
+    width: 100%;
 }
 
 header {
@@ -255,7 +256,7 @@ section a {
     }
 
     .technologies {
-        width: 100vw;
+        width: 100%;
     }
 
     #contact-section {
@@ -268,7 +269,7 @@ section a {
 
     .mail {
         text-align: center;
-        width: 100vw;
+        width: 100%;
     }
 
 }
