@@ -8,17 +8,38 @@ const findByClassName = (className) => {
     return els_array;
 }
 
-const confTitles = (els) => {
-    els[0].classList.add("current-title");
-    els[1].classList.add("next-title");
+// Adds necesary fodder to the list
+const addTitlesFodder = (titles) => {
+    if(titles[0].classList.contains('current-title')) {
+        addFodderBefore();
+    }
+    if(titles[titles.length - 1].classList.contains('current-title')) {
+        addFodderAfter();
+    }
+}
+
+const addFodderBefore = () => {
+    let fodderSpan = document.createElement('span');
+    fodderSpan.classList.add('fodder');
+    let titles = findByClassName('carousel-nav')[0];
+    titles.prepend(fodderSpan);
+}
+
+const addFodderAfter = () => {
+    let fodderSpan = document.createElement('span');
+    fodderSpan.classList.add('fodder');
+    titles.appendChild(fodderSpan);
 }
 
 const init = () => {
-    let titles = findByClassName("carousel-title");
-    confTitles(titles);
-    let prev_title_span = document.createElement('span');
-    prev_title_span.classList.add("previous-title", "fodder");
-    findByClassName("carousel-nav")[0].prepend(prev_title_span);
+    let titles = findByClassName('carousel-title');
+    if(titles) {
+        titles[0].classList.add('current-title');
+        if(titles.length >= 2) { 
+            titles[1].classList.add('next-title');
+        }
+        addTitlesFodder(titles);
+    }
 }
 
 
