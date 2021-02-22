@@ -4,6 +4,10 @@ html {
     width: 100%;
 }
 
+body {
+    height: 100vh;
+}
+
 h1 {
     background-color: rgb(95, 158, 160);
     color: whitesmoke;
@@ -33,7 +37,7 @@ h1 {
     width: 60%;
 }
 
-.previous-title, .next-title {
+.previous-title, .next-title, .fodder {
     display: block;
     width: 20%;
 }

@@ -17,24 +17,24 @@ const init = () => {
     let titles = findByClassName("carousel-title");
     confTitles(titles);
     let prev_title_span = document.createElement('span');
-    prev_title_span.classList.add("previous-title");
-    prev_title_span.id = "carousel-fodder";
+    prev_title_span.classList.add("previous-title", "fodder");
     findByClassName("carousel-nav")[0].prepend(prev_title_span);
 }
 
+
+// Deletes all fodder
 const deleteFodder = () => {
-    let fodder = document.getElementById("carousel-fodder");
-    fodder.remove();
+    let fodderList = findByClassName('fodder');
+    if (fodderList) {
+        fodderList.forEach(elem => elem.remove());
+    }
 }
 
 const nextSlider = () => {
     let titles = findByClassName("carousel-title");
 
     // First, we delete the fodder, if there is
-    let fodder = document.getElementById("carousel-fodder");
-    if(fodder) {
-        fodder.remove();
-    }
+    deleteFodder();
 
     // We modify the "previous" title
     let previousIndex = titles.findIndex(elem => elem.classList.contains("previous-title"));
