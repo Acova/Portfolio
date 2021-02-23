@@ -28,7 +28,27 @@ const addFodderBefore = () => {
 const addFodderAfter = () => {
     let fodderSpan = document.createElement('span');
     fodderSpan.classList.add('fodder');
+    let titles = findByClassName('carousel-nav')[0];
     titles.appendChild(fodderSpan);
+}
+
+const configButtons = (titles) => {
+    let previousIndex = titles.findIndex(elem => elem.classList.contains('previous-title'));
+    let prev_title_btn = document.getElementsByClassName('carousel-btn-prev')[0];
+    console.log(previousIndex);
+    console.log(prev_title_btn);
+    if(previousIndex === -1) {
+        prev_title_btn.disabled = true;
+    } else {
+        prev_title_btn.disabled = false;
+    }
+    let nextIndex =  titles.findIndex(elem => elem.classList.contains('next-title'));
+    let next_title_btn = document.getElementsByClassName('carousel-btn-next')[0];
+    if(nextIndex === -1) {
+        next_title_btn.disabled = true;
+    } else {
+        next_title_btn.disabled = false;
+    }
 }
 
 const init = () => {
@@ -39,6 +59,7 @@ const init = () => {
             titles[1].classList.add('next-title');
         }
         addTitlesFodder(titles);
+        configButtons(titles);
     }
 }
 
@@ -52,42 +73,73 @@ const deleteFodder = () => {
 }
 
 const nextSlider = () => {
-    let titles = findByClassName("carousel-title");
+    let titles = findByClassName('carousel-title');
 
     // First, we delete the fodder, if there is
     deleteFodder();
 
     // We modify the "previous" title
-    let previousIndex = titles.findIndex(elem => elem.classList.contains("previous-title"));
+    let previousIndex = titles.findIndex(elem => elem.classList.contains('previous-title'));
     if(previousIndex != -1) {
         let previous = titles[previousIndex];
-        previous.classList.remove("previous-title");
+        previous.classList.remove('previous-title');
     }
 
     // We set the current title to the previous title
-    let currentIndex = titles.findIndex(elem => elem.classList.contains("current-title"));
+    let currentIndex = titles.findIndex(elem => elem.classList.contains('current-title'));
     let current = titles[currentIndex];
-    current.classList.remove("current-title");
-    current.classList.add("previous-title");
+    current.classList.remove('current-title');
+    current.classList.add('previous-title');
 
     // We set the next title to the current title
-    let nextIndex = titles.findIndex(elem => elem.classList.contains("next-title"));
+    let nextIndex = titles.findIndex(elem => elem.classList.contains('next-title'));
     let next = titles[nextIndex];
-    next.classList.remove("next-title");
-    next.classList.add("current-title");
+    next.classList.remove('next-title');
+    next.classList.add('current-title');
 
     // We must make sure there are more elements
     if((titles.length - 1) > nextIndex){
         let newNext = titles[nextIndex + 1];
-        newNext.classList.add("next-title");
+        newNext.classList.add('next-title');
     } else {
-        let next_title_span = document.createElement('span');
-        next_title_span.classList.add("next-title");
-        next_title_span.id = "carousel-fodder";
-        findByClassName("carousel-nav")[0].appendChild(next_title_span);
-        let next_title_btn = document.getElementById('carousel-btn-next');
-        next_title_btn.setAttribute('disabled', 'true');
+        addTitlesFodder(titles);
     }
+    configButtons(titles);
+}
+
+const previousSlider = () => {
+    let titles = findByClassName('carousel-title');
+
+    // First, we delete the fodder, if there is
+    deleteFodder();
+
+    // We set the next title to the current title
+    let nextIndex = titles.findIndex(elem => elem.classList.contains('next-title'));
+    if(nextIndex !== -1) {
+        let next = titles[nextIndex];
+        next.classList.remove('next-title');
+    }
+
+    // We set the current title to the previous title
+    let currentIndex = titles.findIndex(elem => elem.classList.contains('current-title'));
+    let current = titles[currentIndex];
+    current.classList.remove('current-title');
+    current.classList.add('next-title');
+
+    // We modify the "previous" title
+    let previousIndex = titles.findIndex(elem => elem.classList.contains('previous-title'));
+    let previous = titles[previousIndex];
+    previous.classList.remove('previous-title');
+    previous.classList.add('current-title');
+
+    // We must make sure there are more elements
+    if(previousIndex === 0) {
+        addTitlesFodder(titles);
+    } else {
+        let newPrev = titles [previousIndex - 1];
+        newPrev.classList.add('previous-title');
+    }
+    configButtons(titles);
 }
 
 /* Events */
