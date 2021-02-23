@@ -1,5 +1,3 @@
-/* Helper functions */
-
 const findByClassName = (className) => {
     let els = document.getElementsByClassName(className);
     let els_array = Array.prototype.map.call(els, (elem) => {
@@ -33,15 +31,21 @@ const addFodderAfter = () => {
 }
 
 const configButtons = (titles) => {
+    configNextButton(titles);
+    configPreviousButton(titles);
+}
+
+const configNextButton = (titles) => {
     let previousIndex = titles.findIndex(elem => elem.classList.contains('previous-title'));
     let prev_title_btn = document.getElementsByClassName('carousel-btn-prev')[0];
-    console.log(previousIndex);
-    console.log(prev_title_btn);
     if(previousIndex === -1) {
         prev_title_btn.disabled = true;
     } else {
         prev_title_btn.disabled = false;
     }
+}
+
+const configPreviousButton = (titles) => {
     let nextIndex =  titles.findIndex(elem => elem.classList.contains('next-title'));
     let next_title_btn = document.getElementsByClassName('carousel-btn-next')[0];
     if(nextIndex === -1) {
@@ -75,9 +79,12 @@ const deleteFodder = () => {
 const nextSlider = () => {
     let titles = findByClassName('carousel-title');
 
-    // First, we delete the fodder, if there is
     deleteFodder();
+    nextTitle(titles);
+    configButtons(titles);
+}
 
+const nextTitle = (titles) => {
     // We modify the "previous" title
     let previousIndex = titles.findIndex(elem => elem.classList.contains('previous-title'));
     if(previousIndex != -1) {
@@ -104,15 +111,17 @@ const nextSlider = () => {
     } else {
         addTitlesFodder(titles);
     }
-    configButtons(titles);
 }
 
 const previousSlider = () => {
     let titles = findByClassName('carousel-title');
 
-    // First, we delete the fodder, if there is
     deleteFodder();
+    previousTitle(titles);
+    configButtons(titles);
+}
 
+const previousTitle = (titles) => {
     // We set the next title to the current title
     let nextIndex = titles.findIndex(elem => elem.classList.contains('next-title'));
     if(nextIndex !== -1) {
@@ -139,7 +148,7 @@ const previousSlider = () => {
         let newPrev = titles [previousIndex - 1];
         newPrev.classList.add('previous-title');
     }
-    configButtons(titles);
+
 }
 
 /* Events */
