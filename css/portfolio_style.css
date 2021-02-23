@@ -24,6 +24,15 @@ h1 {
     display: flex;
     flex-flow: row;
     flex-wrap: nowrap;
+    height: 20%;
+    justify-content: center;
+}
+
+.carousel-body {
+    display: flex;
+    flex-flow: row;
+    flex-wrap: nowrap;
+    height: 80%;
     justify-content: center;
 }
 
@@ -32,9 +41,20 @@ h1 {
     text-align: center;
 }
 
+.carousel-elem {
+    display: none;
+    height: 100%;
+    text-align: center;
+}
+
 .current-title {
     display: block;
     width: 60%;
+}
+
+.current-elem {
+    display: block;
+    width: 100%;
 }
 
 .previous-title, .next-title, .fodder {
