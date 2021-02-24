@@ -130,37 +130,20 @@ const nextTitle = (titles) => {
 }
 
 const nextElem = (elems) => {
-    // We modify the "previous" elem
-    let previousIndex = elems.findIndex(elem => elem.classList.contains('previous-elem'));
-    if(previousIndex != -1) {
-        let previous = elems[previousIndex];
-        previous.classList.remove('previous-elem');
-    }
-
-    // We set the current elem to the previous elem
     let currentIndex = elems.findIndex(elem => elem.classList.contains('current-elem'));
     let current = elems[currentIndex];
     current.classList.remove('current-elem');
-    current.classList.add('previous-elem');
-
-    // We set the next elem to the current elem
-    let nextIndex = elems.findIndex(elem => elem.classList.contains('next-elem'));
-    let next = elems[nextIndex];
-    next.classList.remove('next-elem');
+    let next = elems[currentIndex + 1];
     next.classList.add('current-elem');
-
-    // We must make sure there are more elements
-    if((elems.length - 1) > nextIndex){
-        let newNext = elems[nextIndex + 1];
-        newNext.classList.add('next-elem');
-    }
 }
 
 const previousSlider = () => {
     let titles = findByClassName('carousel-title');
+    let elems = findByClassName('carousel-elem');
 
     deleteFodder();
     previousTitle(titles);
+    previousElem(elems);
     configButtons(titles);
 }
 
@@ -192,6 +175,14 @@ const previousTitle = (titles) => {
         newPrev.classList.add('previous-title');
     }
 
+}
+
+const previousElem = (elems) => {
+    let currentIndex = elems.findIndex(elem => elem.classList.contains('current-elem'));
+    let current = elems[currentIndex];
+    current.classList.remove('current-elem');
+    let next = elems[currentIndex - 1];
+    next.classList.add('current-elem');
 }
 
 /* Events */
