@@ -50,9 +50,9 @@ const initBody = (elems) => {
 
 const initTitles = (titles) => {
     if(titles) {
-        titles[0].classList.add('current-title');
+        titles[0].classList.add('current-title', 'sideToCurrent');
         if(titles.length >= 2) { 
-            titles[1].classList.add('next-title');
+            titles[1].classList.add('next-title', 'noneToSide');
         }
         addTitlesFodder(titles);
     }
@@ -70,14 +70,14 @@ const addTitlesFodder = (titles) => {
 
 const addTitleFodderBefore = () => {
     let fodderSpan = document.createElement('span');
-    fodderSpan.classList.add('fodder');
+    fodderSpan.classList.add('fodder', 'noneToSide');
     let titles = findByClassName('carousel-nav')[0];
     titles.prepend(fodderSpan);
 }
 
 const addTitleFodderAfter = () => {
     let fodderSpan = document.createElement('span');
-    fodderSpan.classList.add('fodder');
+    fodderSpan.classList.add('fodder', 'noneToSide');
     let titles = findByClassName('carousel-nav')[0];
     titles.appendChild(fodderSpan);
 }
@@ -105,27 +105,42 @@ const nextTitle = (titles) => {
     let previousIndex = titles.findIndex(elem => elem.classList.contains('previous-title'));
     if(previousIndex != -1) {
         let previous = titles[previousIndex];
-        previous.classList.remove('previous-title');
+        previous.classList.remove('currentToSide', 'noneToSide');
+        previous.classList.add('sideToNone');
+        previous.addEventListener('animationend', e => {
+            previous.classList.remove('previous-title');
+            configButtons(titles);
+        })
     }
 
     // We set the current title to the previous title
     let currentIndex = titles.findIndex(elem => elem.classList.contains('current-title'));
     let current = titles[currentIndex];
-    current.classList.remove('current-title');
-    current.classList.add('previous-title');
+    current.classList.remove('sideToCurrent');
+    current.classList.add('currentToSide');
+    current.addEventListener('animationend', e => {
+        current.classList.remove('current-title');
+        current.classList.add('previous-title');
+        configButtons(titles);
+    });
 
     // We set the next title to the current title
     let nextIndex = titles.findIndex(elem => elem.classList.contains('next-title'));
     let next = titles[nextIndex];
-    next.classList.remove('next-title');
-    next.classList.add('current-title');
+    next.classList.remove('noneToSide', 'currentToSide');
+    next.classList.add('sideToCurrent');
+    next.addEventListener('animationend', e => {
+        next.classList.remove('next-title');
+        next.classList.add('current-title');
+        configButtons(titles);
+    });
 
     // We must make sure there are more elements
     if((titles.length - 1) > nextIndex){
         let newNext = titles[nextIndex + 1];
-        newNext.classList.add('next-title');
+        newNext.classList.add('noneToSide', 'next-title');
     } else {
-        addTitlesFodder(titles);
+        addTitleFodderAfter();
     }
 }
 

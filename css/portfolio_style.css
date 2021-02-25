@@ -1,3 +1,61 @@
+/* Animations */
+@keyframes sideToCurrent {
+    from {
+        width: 20%;
+    }
+    to {
+        width: 60%;
+    }
+}
+
+.sideToCurrent {
+    animation: sideToCurrent 1s ease 0s 1 normal forwards running;
+}
+
+@keyframes currentToSide {
+    from {
+        width: 60%;
+    }
+    to {
+        width: 20%;
+    }
+}
+
+.currentToSide {
+    animation: currentToSide 1s ease 0s 1 normal forwards running;
+}
+
+@keyframes noneToSide {
+    from {
+        width: 0;
+        opacity: 0;
+    }
+    to {
+        width: 20%;
+        opacity: 1;
+    }
+}
+
+.noneToSide {
+    animation: noneToSide 1s ease 0s 1 normal forwards running;
+}
+
+@keyframes sideToNone {
+    from {
+        width: 20;
+    }
+    to {
+        width: 0%;
+        opacity: 0;
+    }
+}
+
+.sideToNone {
+    animation: sideToNone 1s ease 0s 1 normal forwards running;
+}
+
+/* Styles */
+
 html {
     font-family: 'Overpass Mono', monospace;
     font-size: 2vw;
@@ -24,7 +82,7 @@ h1 {
     display: flex;
     flex-flow: row;
     flex-wrap: nowrap;
-    height: 20%;
+    height: 5vh;
     justify-content: center;
 }
 
@@ -38,6 +96,7 @@ h1 {
 
 .carousel-title {
     display: none;
+    height: 100%;
     text-align: center;
 }
 
@@ -49,7 +108,6 @@ h1 {
 
 .current-title {
     display: block;
-    width: 60%;
 }
 
 .current-elem {
@@ -59,7 +117,6 @@ h1 {
 
 .previous-title, .next-title, .fodder {
     display: block;
-    width: 20%;
 }
 
 @media only screen and (min-width: 992px) {
