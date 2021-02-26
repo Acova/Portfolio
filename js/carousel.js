@@ -14,7 +14,7 @@ const configButtons = (titles) => {
 
 const configNextButton = (titles) => {
     console.log(titles);
-    let previousIndex = titles.findIndex(elem => elem.classList.contains('previous-title'));
+    let previousIndex = Array.prototype.findIndex.call(titles, elem => elem.classList.contains('previous-title'));
     let prev_title_btn = document.getElementsByClassName('carousel-btn-prev')[0];
     console.log(previousIndex);
     if(previousIndex === -1) {
@@ -25,7 +25,7 @@ const configNextButton = (titles) => {
 }
 
 const configPreviousButton = (titles) => {
-    let nextIndex =  titles.findIndex(elem => elem.classList.contains('next-title'));
+    let nextIndex = Array.prototype.findIndex.call(titles, elem => elem.classList.contains('next-title'));
     let next_title_btn = document.getElementsByClassName('carousel-btn-next')[0];
     console.log(nextIndex);
     if(nextIndex === -1) {
@@ -36,17 +36,17 @@ const configPreviousButton = (titles) => {
 }
 
 const disableButtons = () => {
-    let btn_prev = findByClassName('carousel-btn-prev')[0];
-    let btn_next = findByClassName('carousel-btn-next')[0];
+    let btn_prev = document.getElementsByClassName('carousel-btn-prev')[0];
+    let btn_next = document.getElementsByClassName('carousel-btn-next')[0];
     
     btn_prev.disabled = true;
     btn_next.disabled = true;
 }
 
 const init = () => {
-    let titles = findByClassName('carousel-title');
+    let titles = document.getElementsByClassName('carousel-title');
     initTitles(titles);
-    let elems = findByClassName('carousel-elem');
+    let elems = document.getElementsByClassName('carousel-elem');
     initBody(elems);
     configButtons(titles);
 }
@@ -83,35 +83,37 @@ const addTitlesFodder = (titles) => {
 const addTitleFodderBefore = () => {
     let fodderSpan = document.createElement('span');
     fodderSpan.classList.add('fodder', 'noneToSide');
-    let titles = findByClassName('carousel-nav')[0];
+    let titles = document.getElementsByClassName('carousel-nav')[0];
     titles.prepend(fodderSpan);
 }
 
 const addTitleFodderAfter = () => {
     let fodderSpan = document.createElement('span');
     fodderSpan.classList.add('fodder', 'noneToSide');
-    let titles = findByClassName('carousel-nav')[0];
+    let titles = document.getElementsByClassName('carousel-nav')[0];
     titles.appendChild(fodderSpan);
 }
 
 // Deletes all fodder
 const deleteFodder = () => {
-    let fodderList = findByClassName('fodder');
+    let fodderList = document.getElementsByClassName('fodder');
     if (fodderList) {
-        fodderList.forEach(elem => elem.remove());
+        Array.prototype.forEach.call(fodderList, elem => {
+            elem.remove();
+        });
     }
 }
 
 const endAnimation = (e) => {
-    let titles = findByClassName('carousel-title');
+    let titles = document.getElementsByClassName('carousel-title');
     configButtons(titles);
     e.target.removeEventListener('animated', endAnimation, false);
 }
 
 const nextSlider = () => {
-    let titles = findByClassName('carousel-title');
-    let elems = findByClassName('carousel-elem');
-    let carousel = findByClassName('carousel')[0];
+    let titles = document.getElementsByClassName('carousel-title');
+    let elems = document.getElementsByClassName('carousel-elem');
+    let carousel = document.getElementsByClassName('carousel')[0];
 
     
     carousel.addEventListener('animated', endAnimation, false);
@@ -124,7 +126,7 @@ const nextSlider = () => {
 
 const nextTitle = (titles) => {
     // We modify the "previous" title
-    let previousIndex = titles.findIndex(elem => elem.classList.contains('previous-title'));
+    let previousIndex = Array.prototype.findIndex.call(titles, elem => elem.classList.contains('previous-title'));
     if(previousIndex != -1) {
         let previous = titles[previousIndex];
         previous.classList.remove('currentToSide', 'noneToSide');
@@ -135,7 +137,7 @@ const nextTitle = (titles) => {
     }
 
     // We set the current title to the previous title
-    let currentIndex = titles.findIndex(elem => elem.classList.contains('current-title'));
+    let currentIndex = Array.prototype.findIndex.call(titles, elem => elem.classList.contains('current-title'));
     let current = titles[currentIndex];
     current.classList.remove('sideToCurrent');
     current.classList.add('currentToSide');
@@ -145,7 +147,7 @@ const nextTitle = (titles) => {
     });
 
     // We set the next title to the current title
-    let nextIndex = titles.findIndex(elem => elem.classList.contains('next-title'));
+    let nextIndex = Array.prototype.findIndex.call(titles, elem => elem.classList.contains('next-title'));
     let next = titles[nextIndex];
     next.classList.remove('noneToSide', 'currentToSide');
     next.classList.add('sideToCurrent');
@@ -153,7 +155,7 @@ const nextTitle = (titles) => {
         next.classList.remove('next-title');
         next.classList.add('current-title');
         let event = new CustomEvent('animated');
-        let carousel = findByClassName('carousel')[0]; 
+        let carousel = document.getElementsByClassName('carousel')[0]; 
         carousel.dispatchEvent(event);
     });
 
@@ -168,7 +170,7 @@ const nextTitle = (titles) => {
 }
 
 const nextElem = (elems) => {
-    let currentIndex = elems.findIndex(elem => elem.classList.contains('current-elem'));
+    let currentIndex = Array.prototype.findIndex.call(elems, elem => elem.classList.contains('current-elem'));
     let current = elems[currentIndex];
     current.classList.remove('current-elem');
     let next = elems[currentIndex + 1];
@@ -176,9 +178,9 @@ const nextElem = (elems) => {
 }
 
 const previousSlider = () => {
-    let titles = findByClassName('carousel-title');
-    let elems = findByClassName('carousel-elem');
-    let carousel = findByClassName('carousel')[0];
+    let titles = document.getElementsByClassName('carousel-title');
+    let elems = document.getElementsByClassName('carousel-elem');
+    let carousel = document.getElementsByClassName('carousel')[0];
 
     carousel.addEventListener('animated', endAnimation, false);
 
@@ -190,7 +192,7 @@ const previousSlider = () => {
 
 const previousTitle = (titles) => {
     // We set the next title to the current title
-    let nextIndex = titles.findIndex(elem => elem.classList.contains('next-title'));
+    let nextIndex = Array.prototype.findIndex.call(titles, elem => elem.classList.contains('next-title'));
     if(nextIndex !== -1) {
         let next = titles[nextIndex];
         next.classList.remove('currentToSide', 'noneToSide');
@@ -201,7 +203,7 @@ const previousTitle = (titles) => {
     }
 
     // We set the current title to the previous title
-    let currentIndex = titles.findIndex(elem => elem.classList.contains('current-title'));
+    let currentIndex = Array.prototype.findIndex.call(titles, elem => elem.classList.contains('current-title'));
     let current = titles[currentIndex];
     current.classList.remove('sideToCurrent');
     current.classList.add('currentToSide');
@@ -211,7 +213,7 @@ const previousTitle = (titles) => {
     });
 
     // We modify the "previous" title
-    let previousIndex = titles.findIndex(elem => elem.classList.contains('previous-title'));
+    let previousIndex = Array.prototype.findIndex.call(titles, elem => elem.classList.contains('previous-title'));
     let previous = titles[previousIndex];
     previous.classList.remove('noneToSide', 'currentToSide')
     previous.classList.add('sideToCurrent');
@@ -219,7 +221,7 @@ const previousTitle = (titles) => {
         previous.classList.remove('previous-title');
         previous.classList.add('current-title');
         let event = new CustomEvent('animated');
-        let carousel = findByClassName('carousel')[0]; 
+        let carousel = document.getElementsByClassName('carousel')[0]; 
         carousel.dispatchEvent(event);
     });
 
@@ -235,7 +237,7 @@ const previousTitle = (titles) => {
 }
 
 const previousElem = (elems) => {
-    let currentIndex = elems.findIndex(elem => elem.classList.contains('current-elem'));
+    let currentIndex = Array.prototype.findIndex.call(elems, elem => elem.classList.contains('current-elem'));
     let current = elems[currentIndex];
     current.classList.remove('current-elem');
     let next = elems[currentIndex - 1];
