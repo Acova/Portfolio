@@ -12,7 +12,7 @@
     <body>
         <header>
             <h1>Proyectos</h1>
-            <a href="index.html">Volver</a>
+            <a href="index.html#portfolio-section">Volver</a>
         </header>
         <main>
             <div class="glide carousel">
@@ -43,15 +43,23 @@
                                     Este proyecto hace uso de <a href="https://nodejs.org/es/" target="_blank">NodeJS</a> y las APIs <a href="https://github.com/lukePeavey/quotable" target="_blank">quotable</a> y <a href="https://www.mediawiki.org/wiki/API:Main_page/es" target="_blank">Wikipedia</a> para obtener una cita aleatoria y mostrar las páginas de Wikipedia más relevantes sobre el autor
                                 </p>
                                 <p>
-                                    Esto fue hecho durante mi formación como desarrollador web. El código fuente puede encontrarse en este <a href="https://github.com/Acova/nodejs-mixed-messages" target="_blank">repositorio</a>
+                                    Esto fue creado durante mi formación como desarrollador web. El código fuente puede encontrarse en este <a href="https://github.com/Acova/nodejs-mixed-messages" target="_blank">repositorio</a>
                                 </p>
                             </div>
                         </li>
                     </ul>
-                    <div class="carousel-controls" data-glide-el="controls">
-                        <button data-glide-dir="<">Previous</button>
-                        <button data-glide-dir=">">Next</button>
-                    </div>
+                </div>
+                <div class="glide__arrows" data-glide-el="controls">
+                    <button class="glide__arrow glide__arrow--left" data-glide-dir="<">
+                        <svg width="32" height="32" stroke="rgb(95, 158, 160)">
+                            <path d="M0 16 L12 0 L16 2.96 L8.8 12.8 L32 12.8 L32 19.2 L8.8 19.2 L16 28.8 L12 32 Z" ></path>
+                        </svg>
+                    </button>
+                    <button class="glide__arrow glide__arrow--right" data-glide-dir=">">
+                        <svg width="32" height="32" stroke="rgb(95, 158, 160)">
+                            <path d="M0 16 L12 0 L16 2.96 L8.8 12.8 L32 12.8 L32 19.2 L8.8 19.2 L16 28.8 L12 32 Z" ></path>
+                        </svg>
+                    </button>
                 </div>
                 <div class="glide__bullets carousel-bullets" data-glide-el="controls[nav]">
                     <button class="glide__bullet" data-glide-dir="=0"></button>

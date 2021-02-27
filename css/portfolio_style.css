@@ -9,11 +9,14 @@ body {
 }
 
 header {
+    align-items: center;
     background-color: rgb(95, 158, 160);
     display: flex;
-    align-items: center;
     justify-content: space-between;
     height: 10vh;
+    position: fixed;
+    width: 100vw;
+    z-index: 1;
 }
 
 header h1 {
@@ -31,8 +34,9 @@ header a {
 }
 
 main {
-    height: 88vh;
-    margin-top: 2vh;
+    height: 90vh;
+    position: relative;
+    top: 10vh;
 }
 
 h1 {
@@ -47,6 +51,7 @@ p {
 
 .project {
     margin: 2rem;
+    padding-bottom: 5vh;
 }
 
 .project ul {
@@ -58,13 +63,14 @@ p {
     height: 100%;
 }
 
-.carousel-controls {
+.glide__arrows {
     display: none;
 }
 
 .carousel-bullets {
     display: flex;
     justify-content: center;
+    position: fixed;
     width: 100vw;
 }
 
@@ -79,7 +85,55 @@ p {
 }
 
 @media only screen and (min-width: 992px) {
-    .carousel-controls {
+
+    html {
+        font-size: 1vw;
+    }
+
+    header {
+        height: 15vh;
+    }
+
+    main {
+        height: 85vh;
+        position: relative;
+        top: 15vh;
+    }
+
+    p {
+        font-size: 1.25rem;
+        margin-top: 1rem;
+    }
+
+    .project {
+        margin: 1rem 2rem;
+        padding-bottom: 5vh;
+    }
+
+    .project ul {
+        font-size: 1.25rem;
+        margin: 2rem 2.5rem;
+    }
+
+    .glide__bullet {
+        background-color: rgb(194, 194, 194);
+        height: 9px;
+        width: 9px;
+    }
+
+    .glide__bullet--active {
+        background-color:rgb(95, 158, 160);
+    }
+
+    .glide__arrows {
         display: block;
+    }
+
+    .glide__arrow {
+        background-color: rgba(231, 229, 229, 0.5);
+        border-color:rgba(231, 229, 229, 0.5);
+        border-radius: 50%;
+        fill:rgb(95, 158, 160);
+        stroke: rgb(95, 158, 160);
     }
 }

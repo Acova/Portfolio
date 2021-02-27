@@ -110,8 +110,8 @@ section a {
 }
 
 #portfolio-section {
-    background-color: rgba(82, 129, 136, 0.9);
-    color:rgb(245, 245, 245);
+    background-color: white;
+    color:black;
 }
 
 .technologies {
@@ -195,12 +195,12 @@ section a {
 }
 
 #contact-section {
-    background-color: rgba(138, 138, 138, 0.877);
+    background-color: rgba(180, 180, 180, 0.877);
 }
 
 .contact-button {
     align-items: center;
-    background-color: rgba(82, 129, 136, 0.9);
+    background-color: rgba(118, 163, 170, 0.9);
     display: flex;
     justify-content: center;
     overflow: auto;
