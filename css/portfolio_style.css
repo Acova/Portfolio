@@ -12,12 +12,22 @@ header {
     background-color: rgb(95, 158, 160);
     display: flex;
     align-items: center;
+    justify-content: space-between;
     height: 10vh;
 }
 
 header h1 {
     color: whitesmoke;
     padding: 1rem;
+}
+
+header a {
+    border: 1px solid whitesmoke;
+    color: whitesmoke;
+    font-size: 2rem;
+    margin: 2rem 4rem 2rem 2rem;
+    padding: 1rem;
+    text-decoration: none;
 }
 
 main {
