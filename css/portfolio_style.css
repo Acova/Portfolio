@@ -8,13 +8,68 @@ body {
     height: 100vh;
 }
 
-h1 {
+header {
     background-color: rgb(95, 158, 160);
+    display: flex;
+    align-items: center;
+    height: 10vh;
+}
+
+header h1 {
     color: whitesmoke;
-    font-size: 4rem;
     padding: 1rem;
 }
 
-@media only screen and (min-width: 992px) {
+main {
+    height: 88vh;
+    margin-top: 2vh;
+}
 
+h1 {
+    color: black;
+    font-size: 3.8rem;
+}
+
+p {
+    font-size: 1.75rem;
+    margin-top: 2rem;
+}
+
+.project {
+    margin: 2rem;
+}
+
+.project ul {
+    font-size: 1.75rem;
+    margin: 1rem 2rem;
+}
+
+.carousel {
+    height: 100%;
+}
+
+.carousel-controls {
+    display: none;
+}
+
+.carousel-bullets {
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+}
+
+.glide__bullet {
+    background-color: rgb(194, 194, 194);
+    height: 3rem;
+    width: 3rem;
+}
+
+.glide__bullet--active {
+    background-color:rgb(95, 158, 160);
+}
+
+@media only screen and (min-width: 992px) {
+    .carousel-controls {
+        display: block;
+    }
 }
