@@ -25,6 +25,7 @@
 html {
     font-family: 'Overpass Mono', monospace;
     font-size: 2vw;
+    scroll-behavior: smooth;
     width: 100%;
 }
 
